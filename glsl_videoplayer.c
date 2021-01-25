@@ -127,7 +127,7 @@ int main(void)
     while (!WindowShouldClose()) {
         // Each frame - update iTime and iResolution to be used in GLSL shader
         float iTime = (float) GetTime();
-        Vector3 iResolution = (Vector3) { GetWindowPosition().x, GetWindowPosition().y, 1.0f };
+        Vector3 iResolution = (Vector3) { (float)GetScreenWidth(), (float)GetScreenHeight(), 1.0f };
         SetShaderValue(shaders[FX_GLITCH], iTimeLoc, &iTime, UNIFORM_FLOAT);
         SetShaderValue(shaders[FX_GLITCH], iResolutionLoc, &iResolution, UNIFORM_VEC3);
 
@@ -261,7 +261,6 @@ int main(void)
         BeginDrawing();
             ClearBackground(RAYWHITE);
             if (plm != NULL) {
-
                 BeginShaderMode(shaders[currentShader]);
                     //If shader required second input texture then it must be assigned here for some reason, see:
                     //     https://github.com/raysan5/raylib/blob/8327857488404b6a242eb771e55ee7b674c61f64/examples/shaders/shaders_multi_sample2d.c#L68
